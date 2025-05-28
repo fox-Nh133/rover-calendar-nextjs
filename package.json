@@ -1,0 +1,30 @@
+{
+  "name": "rover-calendar-nextjs",
+  "version": "1.0.0",
+  "description": "A calendar application built with Next.js and FullCalendar.js",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "keywords": [
+    "nextjs",
+    "calendar",
+    "fullcalendar",
+    "react"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "dependencies": {
+    "next": "latest",
+    "react": "latest",
+    "react-dom": "latest",
+    "fullcalendar": "latest"
+  },
+  "devDependencies": {
+    "typescript": "latest",
+    "@types/react": "latest",
+    "@types/node": "latest"
+  }
+}
