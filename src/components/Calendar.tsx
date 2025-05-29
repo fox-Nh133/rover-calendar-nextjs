@@ -83,12 +83,21 @@ END:VCALENDAR`;
 
     const blob = new Blob([icsContent], { type: 'text/calendar' });
     const url = URL.createObjectURL(blob);
-    const link = document.createElement('a');
-    link.href = url;
-    link.download = `${event.title || 'event'}.ics`;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+
+    const ua = window.navigator.userAgent;
+    const isIOS = /iPhone|iPad|iPod/.test(ua);
+
+    if (isIOS) {
+        window.open(url, '_blank'); // call iOS default behavior to handle .ics files
+    } else {
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = `${event.title}.ics`;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    }
+
     URL.revokeObjectURL(url);
   };
 
