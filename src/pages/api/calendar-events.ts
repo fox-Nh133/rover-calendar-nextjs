@@ -14,9 +14,8 @@ function expandRecurringEvents(events: any[]): any[] {
     const safeStart = new Date(event.start);
     const safeEnd = event.end && !isNaN(new Date(event.end).getTime())
       ? new Date(event.end)
-      : new Date(safeStart.getTime() + 24 * 60 * 60 * 1000); // 終日扱いで+1日
+      : new Date(safeStart.getTime() + 24 * 60 * 60 * 1000); // add one day for all-day events
 
-    // NOTE: allDay は FullCalendar 側で判定するので送らない
     if (!event.rrule) {
       return [{
         uid: event.uid,
@@ -28,7 +27,6 @@ function expandRecurringEvents(events: any[]): any[] {
       }];
     }
 
-    // 以下、繰り返しイベントの展開（省略せず引き継ぎ）
     const rrule = event.rrule;
     const untilDate = new Date(rrule.origOptions.until);
     const weekdays = rrule.origOptions.byweekday?.map(day => day.weekday) || [];
@@ -80,7 +78,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const vevents = Object.values(parsed).filter(e => e.type === 'VEVENT');
     const expandedEvents = expandRecurringEvents(vevents);
 
-    res.setHeader('Cache-Control', 's-maxage=60, stale-while-revalidate=3600');
+    res.setHeader('Cache-Control', 's-maxage=60, stale-while-revalidate=3600'); // Cache for 1 minute, revalidate after 1 hour
     res.status(200).json(expandedEvents);
   } catch (error) {
     console.error('Error fetching calendar:', error);
