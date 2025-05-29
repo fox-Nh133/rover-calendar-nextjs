@@ -26,7 +26,7 @@ const Calendar: React.FC = () => {
         const data = await res.json();
 
         const formatted = data.map((event: any) => ({
-          id: event.uid,
+          id: `${event.title}-${event.start}`,
           title: event.title,
           start: event.start,
           end: event.end,
@@ -44,12 +44,16 @@ const Calendar: React.FC = () => {
   }, []);
 
   const handleEventClick = (arg: { event: any }) => {
-    const clickedEvent = events.find(e => e.id === arg.event.id);
+    const clickedEvent = events.find(
+        e =>
+        e.id === arg.event.id ||
+        (e.title === arg.event.title && e.start === arg.event.startStr)
+    );
     if (clickedEvent) {
-      setSelectedEvent(clickedEvent);
-      setIsModalOpen(true);
+        setSelectedEvent(clickedEvent);
+        setIsModalOpen(true);
     }
-  };
+};
 
   const closeModal = () => {
     setIsModalOpen(false);

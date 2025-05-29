@@ -1,5 +1,4 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import ical from 'ical';
 import { getCachedCalendarEvents } from '@/lib/calendarCache';
 import { CALENDAR_CACHE_SECONDS } from '@/lib/constants';
 
