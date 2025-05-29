@@ -24,6 +24,7 @@
     "@fullcalendar/timegrid": "^6.1.17",
     "bulma": "^1.0.4",
     "fullcalendar": "latest",
+    "ical": "^0.8.0",
     "next": "latest",
     "react": "latest",
     "react-dom": "latest",
