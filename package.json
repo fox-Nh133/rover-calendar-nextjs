@@ -17,14 +17,21 @@
   "author": "Your Name",
   "license": "MIT",
   "dependencies": {
+    "@fullcalendar/core": "^6.1.17",
+    "@fullcalendar/daygrid": "^6.1.17",
+    "@fullcalendar/interaction": "^6.1.17",
+    "@fullcalendar/react": "^6.1.17",
+    "@fullcalendar/timegrid": "^6.1.17",
+    "bulma": "^1.0.4",
+    "fullcalendar": "latest",
     "next": "latest",
     "react": "latest",
     "react-dom": "latest",
-    "fullcalendar": "latest"
+    "sass": "^1.89.0"
   },
   "devDependencies": {
-    "typescript": "latest",
+    "@types/node": "latest",
     "@types/react": "latest",
-    "@types/node": "latest"
+    "typescript": "latest"
   }
 }
