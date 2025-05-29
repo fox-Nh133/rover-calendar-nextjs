@@ -56,50 +56,43 @@ const Calendar: React.FC = () => {
     setSelectedEvent(null);
   };
 
-  const downloadIcs = (event: CalendarEvent) => {
-    const pad = (n: number) => n.toString().padStart(2, '0');
-    const formatDate = (isoString: string) => {
-      const d = new Date(isoString);
-      return (
-        d.getUTCFullYear().toString() +
-        pad(d.getUTCMonth() + 1) +
-        pad(d.getUTCDate()) + 'T' +
-        pad(d.getUTCHours()) +
-        pad(d.getUTCMinutes()) +
-        pad(d.getUTCSeconds()) + 'Z'
-      );
-    };
+//   const downloadIcs = (event: CalendarEvent) => {
+//     const pad = (n: number) => n.toString().padStart(2, '0');
+//     const formatDate = (isoString: string) => {
+//       const d = new Date(isoString);
+//       return (
+//         d.getUTCFullYear().toString() +
+//         pad(d.getUTCMonth() + 1) +
+//         pad(d.getUTCDate()) + 'T' +
+//         pad(d.getUTCHours()) +
+//         pad(d.getUTCMinutes()) +
+//         pad(d.getUTCSeconds()) + 'Z'
+//       );
+//     };
 
-    const icsContent = `BEGIN:VCALENDAR
-VERSION:2.0
-BEGIN:VEVENT
-SUMMARY:${event.title}
-DTSTART:${formatDate(event.start)}
-DTEND:${formatDate(event.end)}
-DESCRIPTION:${event.description || ''}
-LOCATION:${event.location || ''}
-END:VEVENT
-END:VCALENDAR`;
+//     const icsContent = `BEGIN:VCALENDAR
+// VERSION:2.0
+// BEGIN:VEVENT
+// SUMMARY:${event.title}
+// DTSTART:${formatDate(event.start)}
+// DTEND:${formatDate(event.end)}
+// DESCRIPTION:${event.description || ''}
+// LOCATION:${event.location || ''}
+// END:VEVENT
+// END:VCALENDAR`;
 
-    const blob = new Blob([icsContent], { type: 'text/calendar' });
-    const url = URL.createObjectURL(blob);
+//     const blob = new Blob([icsContent], { type: 'text/calendar' });
+//     const url = URL.createObjectURL(blob);
+//     const link = document.createElement('a');
+//     link.href = url;
+//     link.download = `${event.title || 'event'}.ics`;
+//     document.body.appendChild(link);
+//     link.click();
+//     document.body.removeChild(link);
+//     URL.revokeObjectURL(url);
+//   };
 
-    const ua = window.navigator.userAgent;
-    const isIOS = /iPhone|iPad|iPod/.test(ua);
 
-    if (isIOS) {
-        window.open(url, '_blank'); // call iOS default behavior to handle .ics files
-    } else {
-        const link = document.createElement('a');
-        link.href = url;
-        link.download = `${event.title}.ics`;
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-    }
-
-    URL.revokeObjectURL(url);
-  };
 
   return (
     <>
@@ -147,15 +140,27 @@ END:VCALENDAR`;
               )}
             </section>
             <footer className="modal-card-foot">
-              <button
-                className="button is-info"
-                onClick={() => downloadIcs(selectedEvent)}
-              >
-                カレンダーに追加
-              </button>
-              <button className="button" onClick={closeModal}>
-                閉じる
-              </button>
+                <button
+                    className="button is-info"
+                    onClick={() => {
+                    const { title, start, end, description, location } = selectedEvent;
+                    const query = new URLSearchParams({
+                        title: title || '',
+                        start: start || '',
+                        end: end || '',
+                        description: description || '',
+                        location: location || '',
+                    }).toString();
+
+                    // 直接APIエンドポイントに遷移
+                    window.location.href = `/api/download-ics?${query}`;
+                    }}
+                >
+                    カレンダーに追加
+                </button>
+                <button className="button" onClick={closeModal}>
+                    閉じる
+                </button>
             </footer>
           </div>
         </div>
