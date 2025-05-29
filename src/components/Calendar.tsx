@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import FullCalendar, { EventClickArg } from '@fullcalendar/react';
+import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
@@ -43,7 +43,7 @@ const Calendar: React.FC = () => {
     fetchEvents();
   }, []);
 
-  const handleEventClick = (arg: EventClickArg) => {
+  const handleEventClick = (arg: { event: any }) => {
     const clickedEvent = events.find(e => e.id === arg.event.id);
     if (clickedEvent) {
       setSelectedEvent(clickedEvent);
@@ -58,17 +58,16 @@ const Calendar: React.FC = () => {
 
   const downloadIcs = (event: CalendarEvent) => {
     const pad = (n: number) => n.toString().padStart(2, '0');
-
     const formatDate = (isoString: string) => {
-        const d = new Date(isoString);
-        return (
+      const d = new Date(isoString);
+      return (
         d.getUTCFullYear().toString() +
         pad(d.getUTCMonth() + 1) +
         pad(d.getUTCDate()) + 'T' +
         pad(d.getUTCHours()) +
         pad(d.getUTCMinutes()) +
         pad(d.getUTCSeconds()) + 'Z'
-        );
+      );
     };
 
     const icsContent = `BEGIN:VCALENDAR
@@ -84,7 +83,6 @@ END:VCALENDAR`;
 
     const blob = new Blob([icsContent], { type: 'text/calendar' });
     const url = URL.createObjectURL(blob);
-
     const link = document.createElement('a');
     link.href = url;
     link.download = `${event.title || 'event'}.ics`;
@@ -92,7 +90,7 @@ END:VCALENDAR`;
     link.click();
     document.body.removeChild(link);
     URL.revokeObjectURL(url);
-};
+  };
 
   return (
     <>
@@ -111,7 +109,6 @@ END:VCALENDAR`;
         eventClick={handleEventClick}
       />
 
-      {/* モーダル表示 */}
       {isModalOpen && selectedEvent && (
         <div className="modal is-active">
           <div className="modal-background" onClick={closeModal}></div>
@@ -122,17 +119,34 @@ END:VCALENDAR`;
             </header>
             <section className="modal-card-body">
               <p>
-                <strong>開始:</strong> {new Date(selectedEvent.start).toLocaleString('ja-JP')}
+                <strong>開始:</strong>{' '}
+                {new Date(selectedEvent.start).toLocaleString('ja-JP')}
               </p>
               <p>
-                <strong>終了:</strong> {new Date(selectedEvent.end).toLocaleString('ja-JP')}
+                <strong>終了:</strong>{' '}
+                {new Date(selectedEvent.end).toLocaleString('ja-JP')}
               </p>
-              {selectedEvent.location && <p><strong>場所:</strong> {selectedEvent.location}</p>}
-              {selectedEvent.description && <p><strong>説明:</strong> {selectedEvent.description}</p>}
+              {selectedEvent.location && (
+                <p>
+                  <strong>場所:</strong> {selectedEvent.location}
+                </p>
+              )}
+              {selectedEvent.description && (
+                <p>
+                  <strong>説明:</strong> {selectedEvent.description}
+                </p>
+              )}
             </section>
             <footer className="modal-card-foot">
-                <button className="button is-info" onClick={() => downloadIcs(selectedEvent)}>カレンダーに追加</button>
-                <button className="button" onClick={closeModal}>閉じる</button>
+              <button
+                className="button is-info"
+                onClick={() => downloadIcs(selectedEvent)}
+              >
+                カレンダーに追加
+              </button>
+              <button className="button" onClick={closeModal}>
+                閉じる
+              </button>
             </footer>
           </div>
         </div>
