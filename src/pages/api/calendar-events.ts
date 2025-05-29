@@ -29,7 +29,7 @@ function expandRecurringEvents(events: any[]): any[] {
 
     const rrule = event.rrule;
     const untilDate = new Date(rrule.origOptions.until);
-    const weekdays = rrule.origOptions.byweekday?.map(day => day.weekday) || [];
+    const weekdays = rrule.origOptions.byweekday?.map((day: any) => day.weekday) || [];
     const occurrences = [];
     let currentDate = new Date(rrule.origOptions.dtstart);
 
