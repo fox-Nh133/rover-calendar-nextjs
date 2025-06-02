@@ -31,18 +31,41 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   res.status(200).send(icsContent);
 }
 
+function escapeIcsText(text: string): string {
+  return text
+    .replace(/\\/g, '\\\\') // Escape backslashes
+    .replace(/;/g, '\\;') // Escape semicolons
+    .replace(/,/g, '\\,') // Escape commas
+    .replace(/\r?\n/g, '\\n') // Escape newlines
+}
+
+function foldIcsLine(line: string): string {
+  const maxLineLength = 75;
+  if (line.length <= maxLineLength) return line;
+  const folded = [];
+  for (let i = 0; i < line.length; i += maxLineLength) {
+    const part = line.slice(i, i + maxLineLength);
+    folded.push(i === 0 ? part : ' ' + part);
+  }
+  return folded.join('\r\n');
+}
+
 function generateIcs(event: CalendarEvent): string {
-  return `BEGIN:VCALENDAR
-VERSION:2.0
-BEGIN:VEVENT
-SUMMARY:${event.title}
-DTSTART:${formatDate(event.start)}
-DTEND:${formatDate(event.end)}
-DESCRIPTION:${event.description || ''}
-LOCATION:${event.location || ''}
-UID:${generateUid(event)}
-END:VEVENT
-END:VCALENDAR`;
+  const lines = [
+    'BEGIN:VCALENDAR',
+    'VERSION:2.0',
+    'BEGIN:VEVENT',
+    foldIcsLine(`SUMMARY:${escapeIcsText(event.title)}`),
+    foldIcsLine(`DTSTART:${formatDate(event.start)}`),
+    foldIcsLine(`DTEND:${formatDate(event.end)}`),
+    foldIcsLine(`DESCRIPTION:${escapeIcsText(event.description || '')}`),
+    foldIcsLine(`LOCATION:${escapeIcsText(event.location || '')}`),
+    foldIcsLine(`UID:${generateUid(event)}`),
+    'END:VEVENT',
+    'END:VCALENDAR',
+  ];
+
+  return lines.join('\r\n');
 }
 
 function formatDate(iso: string): string {
