@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
+import SafeHtml from '@/components/SafeHtml';
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
@@ -60,44 +61,6 @@ const Calendar: React.FC = () => {
     setSelectedEvent(null);
   };
 
-//   const downloadIcs = (event: CalendarEvent) => {
-//     const pad = (n: number) => n.toString().padStart(2, '0');
-//     const formatDate = (isoString: string) => {
-//       const d = new Date(isoString);
-//       return (
-//         d.getUTCFullYear().toString() +
-//         pad(d.getUTCMonth() + 1) +
-//         pad(d.getUTCDate()) + 'T' +
-//         pad(d.getUTCHours()) +
-//         pad(d.getUTCMinutes()) +
-//         pad(d.getUTCSeconds()) + 'Z'
-//       );
-//     };
-
-//     const icsContent = `BEGIN:VCALENDAR
-// VERSION:2.0
-// BEGIN:VEVENT
-// SUMMARY:${event.title}
-// DTSTART:${formatDate(event.start)}
-// DTEND:${formatDate(event.end)}
-// DESCRIPTION:${event.description || ''}
-// LOCATION:${event.location || ''}
-// END:VEVENT
-// END:VCALENDAR`;
-
-//     const blob = new Blob([icsContent], { type: 'text/calendar' });
-//     const url = URL.createObjectURL(blob);
-//     const link = document.createElement('a');
-//     link.href = url;
-//     link.download = `${event.title || 'event'}.ics`;
-//     document.body.appendChild(link);
-//     link.click();
-//     document.body.removeChild(link);
-//     URL.revokeObjectURL(url);
-//   };
-
-
-
   return (
     <>
       <FullCalendar
@@ -106,11 +69,11 @@ const Calendar: React.FC = () => {
         initialView="dayGridMonth"
         locale="ja"
         height="auto"
-        headerToolbar={{
-          left: 'prev,next today',
-          center: 'title',
-          right: 'dayGridMonth,timeGridWeek,timeGridDay',
-        }}
+        // headerToolbar={{
+        //   left: 'prev,next today',
+        //   center: 'title',
+        //   right: 'dayGridMonth,timeGridWeek,timeGridDay',
+        // }}
         events={events}
         eventClick={handleEventClick}
       />
@@ -118,32 +81,54 @@ const Calendar: React.FC = () => {
       {isModalOpen && selectedEvent && (
         <div className="modal is-active">
           <div className="modal-background" onClick={closeModal}></div>
-          <div className="modal-card">
-            <header className="modal-card-head">
-              <p className="modal-card-title">{selectedEvent.title}</p>
-              <button className="delete" aria-label="close" onClick={closeModal}></button>
-            </header>
+          <div className="modal-card" id="eventModal">
             <section className="modal-card-body">
-              <p>
-                <strong>開始:</strong>{' '}
-                {new Date(selectedEvent.start).toLocaleString('ja-JP')}
-              </p>
-              <p>
-                <strong>終了:</strong>{' '}
-                {new Date(selectedEvent.end).toLocaleString('ja-JP')}
-              </p>
-              {selectedEvent.location && (
-                <p>
-                  <strong>場所:</strong> {selectedEvent.location}
-                </p>
-              )}
-              {selectedEvent.description && (
-                <p>
-                  <strong>説明:</strong> {selectedEvent.description}
-                </p>
-              )}
+              <div className="media">
+                <div className="media-content has-text-centered">
+                  <strong>{selectedEvent.title}</strong>
+                </div>
+                <div className="media-right">
+                  <button className="delete" aria-label="close" onClick={closeModal}></button>
+                </div> 
+              </div>
+              <div className="columns is-mobile">
+                <div className="column is-2 has-text-centered">
+                  <div className="icon">
+                    <img src="/icons/clock-black.svg"></img>
+                  </div>
+                </div>
+                <div className="column">
+                  {new Date(selectedEvent.start).toLocaleString('ja-JP')}
+                  <span> - </span>
+                  {new Date(selectedEvent.end).toLocaleString('ja-JP')}
+                </div>
+              </div>
+              <div className="columns is-mobile">
+                <div className="column is-2 has-text-centered">
+                  <div className="icon">
+                    <img src="/icons/location-black.svg"></img>
+                  </div>
+                </div>
+                <div className="column">
+                  {selectedEvent.location ? selectedEvent.location : '-'}
+                </div>
+              </div>
+              <div className="columns is-mobile">
+                <div className="column is-2 has-text-centered">
+                  <div className="icon">
+                    <img src="/icons/line-attach-file-black.svg"></img>
+                  </div>
+                </div>
+                <div className="column">
+                  {selectedEvent.description ? (
+                    <SafeHtml html={selectedEvent.description} />
+                  ) : (
+                    <p>-</p>
+                  )}
+                </div>
+              </div>
             </section>
-            <footer className="modal-card-foot">
+            <footer className="modal-card-foot buttons">
                 <button
                     className="button is-info"
                     onClick={() => {
@@ -160,9 +145,12 @@ const Calendar: React.FC = () => {
                     window.location.href = `/api/download-ics?${query}`;
                     }}
                 >
-                    カレンダーに追加
+                    <p>カレンダーに追加</p>
+                    <div className="icon">
+                        <img src="/icons/download.svg" alt="Add to Calendar" />
+                    </div>
                 </button>
-                <button className="button" onClick={closeModal}>
+                <button className="button" aria-label="close" onClick={closeModal}>
                     閉じる
                 </button>
             </footer>
