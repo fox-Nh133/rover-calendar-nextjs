@@ -4,6 +4,8 @@ import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
+import ThemeResponsiveImage from './ThemeResponsiveImage';
+import { Theme } from '@fullcalendar/core/internal';
 
 interface CalendarEvent {
   id: string;
@@ -94,7 +96,7 @@ const Calendar: React.FC = () => {
               <div className="columns is-mobile">
                 <div className="column is-2 has-text-centered">
                   <div className="icon">
-                    <img src="/icons/clock-black.svg"></img>
+                    <ThemeResponsiveImage name="clock" />
                   </div>
                 </div>
                 <div className="column">
@@ -106,7 +108,7 @@ const Calendar: React.FC = () => {
               <div className="columns is-mobile">
                 <div className="column is-2 has-text-centered">
                   <div className="icon">
-                    <img src="/icons/location-black.svg"></img>
+                    <ThemeResponsiveImage name="location" />
                   </div>
                 </div>
                 <div className="column">
@@ -116,7 +118,7 @@ const Calendar: React.FC = () => {
               <div className="columns is-mobile">
                 <div className="column is-2 has-text-centered">
                   <div className="icon">
-                    <img src="/icons/line-attach-file-black.svg"></img>
+                    <ThemeResponsiveImage name="line-attach-file" />
                   </div>
                 </div>
                 <div className="column">
