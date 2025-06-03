@@ -5,6 +5,7 @@ export interface CalendarEvent {
   end: string;
   location?: string;
   description?: string;
+  allDay?: boolean;
 }
 export interface CalendarEventWithRRule extends CalendarEvent {
   rrule?: string;

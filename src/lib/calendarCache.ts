@@ -1,4 +1,5 @@
 import { CalendarEvent } from '@/types/CalendarEvent';
+import { isEventAllDay } from './dateUtils';
 import { CALENDAR_CACHE_MS } from './constants';
 
 
@@ -43,6 +44,7 @@ function expandRecurringEvents(events: any[]): CalendarEvent[] {
         end: safeEnd.toISOString(),
         description: event.description || '',
         location: event.location || '',
+        allDay: isEventAllDay(event),
       }];
     }
 
@@ -76,6 +78,14 @@ function expandRecurringEvents(events: any[]): CalendarEvent[] {
           end: occurrenceEnd.toISOString(),
           description: event.description || '',
           location: event.location || '',
+          allDay: isEventAllDay({
+            start: occurrenceStart,
+            end: occurrenceEnd,
+            datetype: {
+              start: event.datetype?.start,
+              end: event.datetype?.end,
+            }
+          }),
         });
       }
       currentDate.setUTCDate(currentDate.getUTCDate() + 1);

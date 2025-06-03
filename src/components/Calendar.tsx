@@ -1,20 +1,22 @@
 import React, { useEffect, useState, useRef } from 'react';
+import { CalendarEvent } from '@/types/CalendarEvent';
 import SafeHtml from '@/components/SafeHtml';
+import ThemeResponsiveImage from '@/components/ThemeResponsiveImage';
+import { formatEventTime } from '@/lib/dateUtils';
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
-import ThemeResponsiveImage from './ThemeResponsiveImage';
-import { Theme } from '@fullcalendar/core/internal';
 
-interface CalendarEvent {
-  id: string;
-  title: string;
-  start: string;
-  end: string;
-  location?: string;
-  description?: string;
-}
+// interface CalendarEvent {
+//   id: string;
+//   title: string;
+//   start: string;
+//   end: string;
+//   location?: string;
+//   description?: string;
+//   allDay?: boolean;
+// }
 
 const Calendar: React.FC = () => {
   const [events, setEvents] = useState<CalendarEvent[]>([]);
@@ -100,9 +102,7 @@ const Calendar: React.FC = () => {
                   </div>
                 </div>
                 <div className="column">
-                  {new Date(selectedEvent.start).toLocaleString('ja-JP')}
-                  <span> - </span>
-                  {new Date(selectedEvent.end).toLocaleString('ja-JP')}
+                  {formatEventTime(selectedEvent.start, selectedEvent.end, selectedEvent.allDay ?? false)}
                 </div>
               </div>
               <div className="columns is-mobile">
