@@ -1,6 +1,6 @@
 interface EventLike {
-  start: Date;
-  end: Date;
+  start?: Date;
+  end?: Date;
   datetype?: {
     start?: string;
     end?: string;
@@ -12,11 +12,15 @@ export function isEventAllDay(event: EventLike): boolean {
 
   const isDateType = datetype?.start === 'date' || datetype?.end === 'date';
 
-  const isStartMidnightUTC = start.getUTCHours() === 0 &&
+  if (!start || !end) return false;
+
+  const isStartMidnightUTC =
+    start.getUTCHours() === 0 &&
     start.getUTCMinutes() === 0 &&
     start.getUTCSeconds() === 0;
 
-  const isEndMidnightUTC = end.getUTCHours() === 0 &&
+  const isEndMidnightUTC =
+    end.getUTCHours() === 0 &&
     end.getUTCMinutes() === 0 &&
     end.getUTCSeconds() === 0;
 
