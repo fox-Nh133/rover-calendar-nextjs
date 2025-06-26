@@ -19,6 +19,8 @@ export function isEventAllDay(event: EventLike): boolean {
     start.getUTCMinutes() === 0 &&
     start.getUTCSeconds() === 0;
 
+  console.log(start, end)
+
   const isEndMidnightUTC =
     end.getUTCHours() === 0 &&
     end.getUTCMinutes() === 0 &&

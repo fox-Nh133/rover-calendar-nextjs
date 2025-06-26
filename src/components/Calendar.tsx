@@ -37,6 +37,7 @@ const Calendar: React.FC = () => {
           end: event.end,
           location: event.location,
           description: event.description,
+          allDay: event.allDay,
         }));
 
         setEvents(formatted);
