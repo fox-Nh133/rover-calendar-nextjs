@@ -51,10 +51,15 @@ export const formatEventTime = (
     d.toTimeString().slice(0, 5); // "HH:MM"
 
   if (allDay) {
-    if (sameDay) {
+    const displayEnd = new Date(end);
+    displayEnd.setDate(displayEnd.getDate() - 1);
+
+    const sameAllDay = start.toDateString() === displayEnd.toDateString();
+
+    if (sameAllDay) {
       return formatDate(start);
     } else {
-      return `${formatDate(start)} - ${formatDate(end, !sameMonth)}`;
+      return `${formatDate(start)} - ${formatDate(displayEnd, !sameMonth)}`;
     }
   } else {
     if (sameDay) {
