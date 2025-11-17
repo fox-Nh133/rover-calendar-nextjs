@@ -1,5 +1,6 @@
 import React from 'react';
 import Calendar from '../components/Calendar';
+import TodayInfo from '../components/TodayInfo';
 
 const Home: React.FC = () => {
   return (
@@ -43,22 +44,7 @@ const Home: React.FC = () => {
         <div className="container">
           <div className="columns">
             {/* 今日の情報 */}
-            <div className="column is-one-third">
-              <div className="box">
-                <div className="has-text-centered">
-                  <h1 className="title" id="currentDate">current date</h1>
-                  <p className="subtitle" id="currentDay">current day</p>
-                </div>
-                <hr />
-                <div className="block">
-                  <p id="closestEvent">直近のイベント</p>
-                </div>
-                <div className="block has-text-centered">
-                  <strong id="closestEventTitle"></strong>
-                </div>
-                {/* 日時・場所・説明などは省略。必要なら移植可能 */}
-              </div>
-            </div>
+            <TodayInfo />
 
             {/* カレンダー */}
             <div className="column">
