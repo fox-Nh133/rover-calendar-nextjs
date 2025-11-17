@@ -22,7 +22,6 @@
     "@fullcalendar/interaction": "^6.1.17",
     "@fullcalendar/react": "^6.1.17",
     "@fullcalendar/timegrid": "^6.1.17",
-    "bulma": "^1.0.4",
     "fullcalendar": "latest",
     "ical": "^0.8.0",
     "next": "latest",

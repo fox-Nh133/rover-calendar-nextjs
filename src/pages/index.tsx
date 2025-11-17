@@ -1,77 +1,68 @@
 import React from 'react';
 import Calendar from '../components/Calendar';
 import TodayInfo from '../components/TodayInfo';
+import styles from './index.module.scss';
 
 const Home: React.FC = () => {
   return (
-    <>
-      {/* ヘッダー */}
-      <nav className="navbar">
-        <div className="container">
-          <div className="navbar-brand">
-            <a className="navbar-item" href="/">
-              <h1 className="title">ローバーカレンダー</h1>
-            </a>
-            <span className="navbar-burger burger" data-target="navbarMenu">
-              <span></span>
-              <span></span>
-              <span></span>
-            </span>
-          </div>
-          <div id="navbarMenu" className="navbar-menu">
-            <div className="navbar-end">
-              <div className="navbar-item">
-                <div className="control has-icons-left">
-                  <input className="input is-rounded" type="email" placeholder="Search" />
-                  <span className="icon is-left">
-                    <i className="fa fa-search"></i>
-                  </span>
-                </div>
-              </div>
-              <a className="navbar-item is-active is-size-5 has-text-weight-semibold" href="/">
+    <div className={styles.page}>
+      <header className={styles.header}>
+        <div className={styles.headerContent}>
+          <a className={styles.brand} href="/">
+            <h1 className={styles.title}>ローバーカレンダー</h1>
+          </a>
+          <div className={styles.headerActions}>
+            <label className={styles.searchField} htmlFor="global-search">
+              <span className={styles.srOnly}>検索</span>
+              <input
+                id="global-search"
+                className={styles.searchInput}
+                type="search"
+                placeholder="Search"
+              />
+              <span className={styles.searchIcon} aria-hidden="true">
+                🔍
+              </span>
+            </label>
+            <nav className={styles.navLinks} aria-label="主要ナビゲーション">
+              <a className={`${styles.navLink} ${styles.navLinkActive}`} href="/">
                 ホーム
               </a>
-              <a className="navbar-item is-size-5 has-text-weight-semibold" href="/about">
+              <a className={styles.navLink} href="/about">
                 このサイトについて
               </a>
-            </div>
+            </nav>
           </div>
         </div>
-      </nav>
+      </header>
 
-      {/* メインビュー */}
-      <section className="section">
-        <div className="container">
-          <div className="columns">
-            {/* 今日の情報 */}
+      <main className={styles.main}>
+        <div className={styles.layout}>
+          <div className={styles.infoColumn}>
             <TodayInfo />
+          </div>
 
-            {/* カレンダー */}
-            <div className="column">
-              <div className="box">
-                <label className="checkbox is-flex" id="isListView">
-                  <input type="checkbox" id="listViewCheckbox" />
-                  <div>リスト表示</div>
-                </label>
-                <Calendar />
-              </div>
+          <div className={styles.calendarColumn}>
+            <div className={styles.card}>
+              <label className={styles.listToggle} htmlFor="listViewCheckbox">
+                <input className={styles.listToggleInput} type="checkbox" id="listViewCheckbox" />
+                <span className={styles.listToggleText}>リスト表示</span>
+              </label>
+              <Calendar />
             </div>
           </div>
         </div>
-      </section>
+      </main>
 
-      {/* フッター */}
-      <footer className="footer">
-        <div className="content has-text-centered">
+      <footer className={styles.footer}>
+        <div className={styles.footerContent}>
           <p>
             <strong>Rover Calendar</strong> by <a href="https://masaya.narita.info">Masaya Narita</a>
           </p>
-          <p>
-            Powered by <a href="https://bulma.io">Bulma</a>
-          </p>
+          <p>Styled with handcrafted SCSS modules.</p>
         </div>
       </footer>
-    </>
+    </div>
   );
 };
 

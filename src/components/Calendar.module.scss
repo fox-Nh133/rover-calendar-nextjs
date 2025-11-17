@@ -1,0 +1,165 @@
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.55);
+}
+
+.modalCard {
+  position: relative;
+  background-color: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 35px 65px rgba(15, 23, 42, 0.25);
+  max-width: 520px;
+  width: calc(100% - 2rem);
+  overflow: hidden;
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.modalBody {
+  padding: 1.75rem 1.75rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.modalHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.modalTitle {
+  font-size: 1.3rem;
+  margin: 0;
+}
+
+.closeButton {
+  border: none;
+  background: rgba(15, 23, 42, 0.08);
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 999px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.closeButton:hover {
+  background: rgba(15, 23, 42, 0.16);
+}
+
+.detailList {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.detailRow {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.detailIcon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background-color: #f1f5f9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.detailImage {
+  width: 28px;
+  height: 28px;
+}
+
+.detailContent {
+  flex: 1;
+  color: #0f172a;
+  line-height: 1.5;
+}
+
+.placeholder {
+  color: #94a3b8;
+}
+
+.modalFooter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  padding: 0 1.75rem 1.75rem;
+}
+
+.modalButton {
+  flex: 1;
+  min-width: 140px;
+  border-radius: 14px;
+  border: 1px solid #d5d7de;
+  background-color: #ffffff;
+  font-weight: 600;
+  padding: 0.85rem 1rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.modalButton:hover {
+  border-color: #2563eb;
+  color: #2563eb;
+}
+
+.primaryButton {
+  background: #2563eb;
+  color: #ffffff;
+  border-color: #2563eb;
+}
+
+.primaryButton:hover {
+  background: #1d4ed8;
+}
+
+.buttonIcon {
+  width: 1.1rem;
+  height: 1.1rem;
+}
+
+@media (max-width: 480px) {
+  .modalBody {
+    padding: 1.5rem 1.25rem;
+  }
+
+  .modalFooter {
+    padding: 0 1.25rem 1.25rem;
+    flex-direction: column;
+  }
+
+  .modalButton {
+    width: 100%;
+  }
+}

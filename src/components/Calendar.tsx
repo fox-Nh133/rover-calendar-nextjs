@@ -7,16 +7,7 @@ import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
-
-// interface CalendarEvent {
-//   id: string;
-//   title: string;
-//   start: string;
-//   end: string;
-//   location?: string;
-//   description?: string;
-//   allDay?: boolean;
-// }
+import styles from './Calendar.module.scss';
 
 const Calendar: React.FC = () => {
   const [events, setEvents] = useState<CalendarEvent[]>([]);
@@ -51,15 +42,13 @@ const Calendar: React.FC = () => {
 
   const handleEventClick = (arg: { event: any }) => {
     const clickedEvent = events.find(
-        e =>
-        e.id === arg.event.id ||
-        (e.title === arg.event.title && e.start === arg.event.startStr)
+      e => e.id === arg.event.id || (e.title === arg.event.title && e.start === arg.event.startStr)
     );
     if (clickedEvent) {
-        setSelectedEvent(clickedEvent);
-        setIsModalOpen(true);
+      setSelectedEvent(clickedEvent);
+      setIsModalOpen(true);
     }
-};
+  };
 
   const closeModal = () => {
     setIsModalOpen(false);
@@ -74,88 +63,99 @@ const Calendar: React.FC = () => {
         initialView="dayGridMonth"
         locale="ja"
         height="auto"
-        // headerToolbar={{
-        //   left: 'prev,next today',
-        //   center: 'title',
-        //   right: 'dayGridMonth,timeGridWeek,timeGridDay',
-        // }}
         events={events}
         eventClick={handleEventClick}
       />
 
       {isModalOpen && selectedEvent && (
-        <div className="modal is-active">
-          <div className="modal-background" onClick={closeModal}></div>
-          <div className="modal-card" id="eventModal">
-            <section className="modal-card-body">
-              <div className="media">
-                <div className="media-content has-text-centered">
-                  <strong>{selectedEvent.title}</strong>
-                </div>
-                <div className="media-right">
-                  <button className="delete" aria-label="close" onClick={closeModal}></button>
-                </div> 
+        <div className={styles.modal} role="dialog" aria-modal="true">
+          <div className={styles.backdrop} onClick={closeModal}></div>
+          <div className={styles.modalCard} id="eventModal">
+            <section className={styles.modalBody}>
+              <div className={styles.modalHeader}>
+                <strong className={styles.modalTitle}>{selectedEvent.title}</strong>
+                <button
+                  className={styles.closeButton}
+                  aria-label="close"
+                  type="button"
+                  onClick={closeModal}
+                >
+                  ×
+                </button>
               </div>
-              <div className="columns is-mobile">
-                <div className="column is-2 has-text-centered">
-                  <div className="icon">
-                    <ThemeResponsiveImage name="clock" />
+              <div className={styles.detailList}>
+                <div className={styles.detailRow}>
+                  <div className={styles.detailIcon}>
+                    <ThemeResponsiveImage name="clock" className={styles.detailImage} />
+                  </div>
+                  <div className={styles.detailContent}>
+                    <p>
+                      {formatEventTime(
+                        selectedEvent.start,
+                        selectedEvent.end,
+                        selectedEvent.allDay ?? false
+                      )}
+                    </p>
                   </div>
                 </div>
-                <div className="column">
-                  {formatEventTime(selectedEvent.start, selectedEvent.end, selectedEvent.allDay ?? false)}
-                </div>
-              </div>
-              <div className="columns is-mobile">
-                <div className="column is-2 has-text-centered">
-                  <div className="icon">
-                    <ThemeResponsiveImage name="location" />
+                <div className={styles.detailRow}>
+                  <div className={styles.detailIcon}>
+                    <ThemeResponsiveImage name="location" className={styles.detailImage} />
+                  </div>
+                  <div className={styles.detailContent}>
+                    {selectedEvent.location ? (
+                      <p>{selectedEvent.location}</p>
+                    ) : (
+                      <p className={styles.placeholder}>-</p>
+                    )}
                   </div>
                 </div>
-                <div className="column">
-                  {selectedEvent.location ? selectedEvent.location : '-'}
-                </div>
-              </div>
-              <div className="columns is-mobile">
-                <div className="column is-2 has-text-centered">
-                  <div className="icon">
-                    <ThemeResponsiveImage name="line-attach-file" />
+                <div className={styles.detailRow}>
+                  <div className={styles.detailIcon}>
+                    <ThemeResponsiveImage name="line-attach-file" className={styles.detailImage} />
                   </div>
-                </div>
-                <div className="column">
-                  {selectedEvent.description ? (
-                    <SafeHtml html={selectedEvent.description} />
-                  ) : (
-                    <p>-</p>
-                  )}
+                  <div className={styles.detailContent}>
+                    {selectedEvent.description ? (
+                      <SafeHtml html={selectedEvent.description} />
+                    ) : (
+                      <p className={styles.placeholder}>-</p>
+                    )}
+                  </div>
                 </div>
               </div>
             </section>
-            <footer className="modal-card-foot buttons">
-                <button
-                    className="button is-info"
-                    onClick={() => {
-                    const { title, start, end, description, location } = selectedEvent;
-                    const query = new URLSearchParams({
-                        title: title || '',
-                        start: start || '',
-                        end: end || '',
-                        description: description || '',
-                        location: location || '',
-                    }).toString();
+            <footer className={styles.modalFooter}>
+              <button
+                className={`${styles.modalButton} ${styles.primaryButton}`}
+                type="button"
+                onClick={() => {
+                  const { title, start, end, description, location } = selectedEvent;
+                  const query = new URLSearchParams({
+                    title: title || '',
+                    start: start || '',
+                    end: end || '',
+                    description: description || '',
+                    location: location || '',
+                  }).toString();
 
-                    // 直接APIエンドポイントに遷移
-                    window.location.href = `/api/download-ics?${query}`;
-                    }}
-                >
-                    <p>カレンダーに追加</p>
-                    <div className="icon">
-                        <img src="/icons/download.svg" alt="Add to Calendar" />
-                    </div>
-                </button>
-                <button className="button" aria-label="close" onClick={closeModal}>
-                    閉じる
-                </button>
+                  window.location.href = `/api/download-ics?${query}`;
+                }}
+              >
+                <span>カレンダーに追加</span>
+                <img
+                  src="/icons/download.svg"
+                  alt="Add to Calendar"
+                  className={styles.buttonIcon}
+                />
+              </button>
+              <button
+                className={styles.modalButton}
+                type="button"
+                aria-label="close"
+                onClick={closeModal}
+              >
+                閉じる
+              </button>
             </footer>
           </div>
         </div>

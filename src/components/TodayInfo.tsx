@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { CalendarEvent } from '@/types/CalendarEvent';
 import { formatEventTime } from '@/lib/dateUtils';
+import styles from './TodayInfo.module.scss';
 
 const TodayInfo: React.FC = () => {
   const [currentDate, setCurrentDate] = useState('');
@@ -39,11 +40,7 @@ const TodayInfo: React.FC = () => {
         if (target) {
           setClosestEvent(target.event);
           setClosestEventTime(
-            formatEventTime(
-              target.event.start,
-              target.event.end,
-              target.event.allDay ?? false
-            )
+            formatEventTime(target.event.start, target.event.end, target.event.allDay ?? false)
           );
         }
       } catch (error) {
@@ -55,28 +52,34 @@ const TodayInfo: React.FC = () => {
   }, []);
 
   return (
-    <div className="column is-one-third">
-      <div className="box">
-        <div className="has-text-centered">
-          <h1 className="title" id="currentDate">{currentDate || 'current date'}</h1>
-          <p className="subtitle" id="currentDay">{currentDay || 'current day'}</p>
-        </div>
-        <hr />
-        <div className="block">
-          <p id="closestEvent">直近のイベント</p>
-        </div>
-        <div className="block has-text-centered">
-          {closestEvent ? (
-            <>
-              <strong id="closestEventTitle">{closestEvent.title || 'タイトル未設定'}</strong>
-              <p className="mt-2">{closestEventTime}</p>
-            </>
-          ) : (
-            <p className="has-text-grey" id="closestEventTitle">イベント情報を取得できませんでした</p>
-          )}
-        </div>
+    <section className={styles.card}>
+      <div className={styles.heading}>
+        <h1 className={styles.date} id="currentDate">
+          {currentDate || 'current date'}
+        </h1>
+        <p className={styles.day} id="currentDay">
+          {currentDay || 'current day'}
+        </p>
       </div>
-    </div>
+      <hr className={styles.divider} />
+      <p className={styles.sectionTitle} id="closestEvent">
+        直近のイベント
+      </p>
+      <div className={styles.eventBlock}>
+        {closestEvent ? (
+          <>
+            <strong className={styles.eventTitle} id="closestEventTitle">
+              {closestEvent.title || 'タイトル未設定'}
+            </strong>
+            <p className={styles.eventTime}>{closestEventTime}</p>
+          </>
+        ) : (
+          <p className={styles.emptyMessage} id="closestEventTitle">
+            イベント情報を取得できませんでした
+          </p>
+        )}
+      </div>
+    </section>
   );
 };
 
