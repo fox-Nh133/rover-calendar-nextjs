@@ -1,12 +1,13 @@
 .card {
-  background: linear-gradient(135deg, #ffffff 0%, #f7f9ff 100%);
-  border-radius: 20px;
-  box-shadow: 0 25px 50px rgba(15, 23, 42, 0.1);
-  padding: 1.75rem;
+  background: #fefefe;
+  border: 3px solid #344455;
+  border-radius: 40px;
+  // box-shadow: 0 25px 50px rgba(15, 23, 42, 0.1);
+  padding: 1.5rem;
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
-  min-height: 100%;
+  gap: 0.8rem;
+  max-height: 70%;
 }
 
 .heading {
@@ -27,7 +28,7 @@
 
 .divider {
   border: 0;
-  border-top: 1px solid rgba(148, 163, 184, 0.4);
+  border-top: 2px solid #344455;
   margin: 0;
 }
 
