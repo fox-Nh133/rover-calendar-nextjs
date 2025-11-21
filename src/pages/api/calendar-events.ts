@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { getCachedCalendarEvents } from '@/lib/calendarCache';
-import { CALENDAR_CACHE_SECONDS } from '@/lib/constants';
+import { CALENDAR_CACHE_SECONDS } from '@/lib/globalConstants';
 
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {

@@ -1,0 +1,15 @@
+// 以下のリストは、本サイト/プロダクトで使用されているアセット（アイコン、画像など）のうち、
+// **ライセンス規約により帰属表示（アトリビューション）が必要なもの**を記載しています。
+//
+// 帰属表示は不要なアセット（IconScoutのデジタルライセンスによるアイコンなど）については、個別の記載は省略しています。
+
+
+[   
+    {
+        "image": "Free Search Icon",
+        "url": "https://github.com/colebemis/feather/blob/master/LICENSE",
+        "author": "Cole Bemis",
+        "copyright_notice": "Copyright (c) 2013-2023 Cole Bemis. Licensed under the MIT License.",
+        "project-url": "https://feathericons.com/"
+    }
+]
