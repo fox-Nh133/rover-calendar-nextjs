@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { CalendarEvent } from '@/types/CalendarEvent';
 import { formatEventTime } from '@/lib/dateUtils';
 import styles from './TodayInfo.module.scss';
+import ThemeResponsiveImage from './ThemeResponsiveImage';
 
 const TodayInfo: React.FC = () => {
   const [currentDate, setCurrentDate] = useState('');
@@ -77,6 +78,16 @@ const TodayInfo: React.FC = () => {
             イベント情報を取得できませんでした
           </p>
         )}
+      </div>
+      <div className={styles.detailList}>
+        <div className={styles.detailRow}>
+          <ThemeResponsiveImage name="clock" className={styles.detailImage} />
+        </div>
+        <div className={styles.detatilContent}>
+          <p>
+            {}
+          </p>
+        </div>
       </div>
     </section>
   );
