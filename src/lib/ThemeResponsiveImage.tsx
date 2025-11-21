@@ -7,6 +7,7 @@ interface ThemeResponsiveImageProps {
   width?: number;
   height?: number;
   className?: string;
+  forceWhite?: boolean; // activeな状態など、強制的にwhiteアイコンを使用する場合
 }
 
 export default function ThemeResponsiveImage({
@@ -15,10 +16,11 @@ export default function ThemeResponsiveImage({
   width,
   height,
   className = '',
+  forceWhite = false,
 }: ThemeResponsiveImageProps) {
   const scheme = usePreferredColorScheme();
 
-  const color = scheme === 'dark' ? 'white' : 'black';
+  const color = forceWhite ? 'white' : (scheme === 'dark' ? 'white' : 'black');
 
   const src = `/icons/${name}-${color}.svg`;
 

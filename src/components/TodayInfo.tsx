@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { CalendarEvent } from '@/types/CalendarEvent';
 import { formatEventTime } from '@/lib/dateUtils';
 import styles from './TodayInfo.module.scss';
+import ThemeResponsiveImage from '@/lib/ThemeResponsiveImage';
+import SafeHtml from '@/lib/SafeHtml';
 
 const TodayInfo: React.FC = () => {
   const [currentDate, setCurrentDate] = useState('');
@@ -24,11 +26,11 @@ const TodayInfo: React.FC = () => {
       try {
         const res = await fetch('/api/calendar-events');
         if (!res.ok) throw new Error('failed to fetch events');
-        const data: CalendarEvent[] = await res.json();
-        if (!Array.isArray(data)) return;
+        const events: CalendarEvent[] = await res.json();
+        if (!Array.isArray(events)) return;
 
         const nowTime = Date.now();
-        const sorted = data
+        const sorted = events
           .map(event => ({ event, startTime: new Date(event.start).getTime() }))
           .filter(({ startTime }) => !Number.isNaN(startTime))
           .sort((a, b) => a.startTime - b.startTime);
@@ -64,13 +66,48 @@ const TodayInfo: React.FC = () => {
       <p className={styles.sectionTitle} id="closestEvent">
         直近のイベント
       </p>
-      <div className={styles.eventBlock}>
+      <div className={styles.eventBody}>
         {closestEvent ? (
           <>
-            <strong className={styles.eventTitle} id="closestEventTitle">
-              {closestEvent.title || 'タイトル未設定'}
-            </strong>
-            <p className={styles.eventTime}>{closestEventTime}</p>
+            <div className={styles.eventHeader}>
+              <strong className={styles.eventTitle} id="closestEventTitle">
+                {closestEvent.title || 'タイトル未設定'}
+              </strong>
+            </div>
+            <div className={styles.detailList}>
+              <div className={styles.detailRow}>
+                <div className={styles.detailIcon}>
+                  <ThemeResponsiveImage name="clock" className={styles.detailImage} />
+                </div>
+                <div className={styles.detatilContent}>
+                  <p id="closestEventTime">{closestEventTime}</p>
+                </div>
+              </div>
+                  <div className={styles.detailRow}>
+                    <div className={styles.detailIcon}>
+                      <ThemeResponsiveImage name="location" className={styles.detailImage} />
+                    </div>
+                    <div className={styles.detailContent}>
+                      {closestEvent.location ? (
+                        <p>{closestEvent.location}</p>
+                      ) : (
+                        <p className={styles.placeholder}>-</p>
+                      )}
+                    </div>
+                  </div>
+                  <div className={styles.detailRow}>
+                    <div className={styles.detailIcon}>
+                      <ThemeResponsiveImage name="line-attach-file" className={styles.detailImage} />
+                    </div>
+                    <div className={styles.detailContent}>
+                      {closestEvent.description ? (
+                        <SafeHtml html={closestEvent.description} />
+                      ) : (
+                        <p className={styles.placeholder}>-</p>
+                      )}
+                    </div>
+                  </div>
+            </div>
           </>
         ) : (
           <p className={styles.emptyMessage} id="closestEventTitle">

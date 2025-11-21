@@ -1,6 +1,6 @@
 import { CalendarEvent } from '@/types/CalendarEvent';
 import { isEventAllDay } from './dateUtils';
-import { CALENDAR_CACHE_MS } from './constants';
+import { CALENDAR_CACHE_MS } from './globalConstants';
 
 
 let cachedEvents: CalendarEvent[] = [];

@@ -3,15 +3,15 @@
   border: 3px solid #344455;
   border-radius: 40px;
   // box-shadow: 0 25px 50px rgba(15, 23, 42, 0.1);
-  padding: 1.5rem;
+  padding: 1.5rem 1.75rem 2.25rem;
   display: flex;
   flex-direction: column;
-  gap: 0.8rem;
-  max-height: 70%;
+  gap: 0.4rem;
 }
 
 .heading {
   text-align: center;
+  gap: 0.8rem;
 }
 
 .date {
@@ -29,9 +29,10 @@
 .divider {
   border: 0;
   border-top: 2px solid #344455;
-  margin: 0;
+  margin: 0.15rem 0;
 }
 
+// 左上に表示するdescription「直近のイベント」のスタイル
 .sectionTitle {
   font-weight: 600;
   color: #0f172a;
@@ -39,14 +40,65 @@
   font-size: 0.9rem;
 }
 
+.eventBody {
+  padding: 0 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
 .eventBlock {
   text-align: center;
+}
+
+.eventHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
 }
 
 .eventTitle {
   font-size: 1.2rem;
   margin-bottom: 0.35rem;
   display: inline-block;
+}
+
+.detailList {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.detailRow {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.detailIcon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background-color: #f1f5f9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.detailImage {
+  width: 28px;
+  height: 28px;
+}
+
+.detailContent {
+  flex: 1;
+  color: #0f172a;
+  line-height: 1.5;
+}
+
+.placeholder {
+  color: #94a3b8;
 }
 
 .eventTime {

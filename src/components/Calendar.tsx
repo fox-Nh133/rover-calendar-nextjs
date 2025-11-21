@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { CalendarEvent } from '@/types/CalendarEvent';
-import SafeHtml from '@/components/SafeHtml';
-import ThemeResponsiveImage from '@/components/ThemeResponsiveImage';
+import SafeHtml from '@/lib/SafeHtml';
+import ThemeResponsiveImage from '@/lib/ThemeResponsiveImage';
 import { formatEventTime } from '@/lib/dateUtils';
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';

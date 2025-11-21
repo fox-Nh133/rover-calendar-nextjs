@@ -117,16 +117,16 @@ $max-width: 1200px;
   margin: 0 auto;
   padding: 2rem 1rem 3rem;
   display: flex;
-  gap: 2rem;
+  gap: 2.25rem;
   flex-wrap: wrap;
 }
 
 .infoColumn {
-  flex: 1 1 280px;
+  flex: 2.5 1 0;
 }
 
 .calendarColumn {
-  flex: 2 1 480px;
+  flex: 4 1 0;
 }
 
 .card {
@@ -141,7 +141,7 @@ $max-width: 1200px;
   align-items: center;
   gap: 0.5rem;
   font-weight: 600;
-  color: #1f2937;
+  color: #344455;
   margin-bottom: 1rem;
   cursor: pointer;
 }
