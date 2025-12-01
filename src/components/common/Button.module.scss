@@ -1,0 +1,72 @@
+// Base button styles
+$button-height: 2.45rem;
+$icon-size: 2rem;
+
+.button {
+  display: inline-flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: $button-height - $icon-size;
+  border-radius: 0.95rem;
+  border: 3px solid #344455;
+  background: #ffffff;
+  color: #0f172a;
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+  align-items: center;
+}
+
+.button:hover {
+  background: #f0f3f7;
+}
+
+/* active state */
+.button.active {
+  background: #344455;
+  color: #ffffff;
+  border-color: #344455;
+}
+
+.button.active:hover {
+  background: #2c3a4a;
+}
+
+/* primary variant - can be extended later */
+.button.primary {
+  /* Add primary specific styles here if needed */
+}
+
+/* dashed variant */
+.button.dashed {
+  background: transparent;
+  border-style: dashed;
+}
+
+/* Icon and label styles for buttons */
+.iconWrap {
+  display: inline-flex;
+  width: $icon-size;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon {
+  width: auto;
+}
+
+.label {
+  font-size: 1.15rem;
+  display: inline-flex;
+  align-items: center;
+}
+
+@media (max-width: 600px) {
+  .button {
+    padding: 0.45rem 0.7rem;
+    min-width: 48px;
+  }
+  .label {
+    display: none; /* 小画面ではアイコンのみ表示する場合 */
+  }
+}

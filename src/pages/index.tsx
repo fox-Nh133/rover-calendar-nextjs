@@ -13,26 +13,12 @@ const Home: React.FC = () => {
             <h1 className={styles.title}>ローバーカレンダー</h1>
           </a>
           <div className={styles.headerActions}>
-            <label className={styles.searchField} htmlFor="global-search">
-              <span className={styles.srOnly}>検索</span>
-              <input
-                id="global-search"
-                className={styles.searchInput}
-                type="search"
-                placeholder="Search"
-              />
-              <span className={styles.searchIcon} aria-hidden="true">
-                🔍
-              </span>
-            </label>
-            <nav className={styles.navLinks} aria-label="主要ナビゲーション">
-              <a className={`${styles.navLink} ${styles.navLinkActive}`} href="/">
-                ホーム
-              </a>
-              <a className={styles.navLink} href="/about">
-                このサイトについて
-              </a>
-            </nav>
+            <button
+              type="button"
+              className={styles.myPageButton}
+            >
+              <span className={styles.myPageLabel}>マイページ</span>
+            </button>
           </div>
         </div>
       </header>
