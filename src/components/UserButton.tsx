@@ -7,9 +7,19 @@ interface UserButtonProps {
   isActive: boolean;
   onClick: () => void;
   flex?: string;
+  showLabel?: boolean;
+  label?: string;
+  customClassName?: string;
 }
 
-export default function UserButton({ isActive, onClick, flex }: UserButtonProps) {
+export default function UserButton({ 
+  isActive, 
+  onClick, 
+  flex, 
+  showLabel = false, 
+  label = "マイページ", 
+  customClassName = "" 
+}: UserButtonProps) {
   return (
     <Button
       variant="default"
@@ -17,6 +27,7 @@ export default function UserButton({ isActive, onClick, flex }: UserButtonProps)
       onClick={onClick}
       aria-pressed={isActive}
       style={flex ? { flex } : undefined}
+      className={customClassName}
     >
       <span className={styles.iconWrap}>
         <ThemeResponsiveImage
@@ -26,6 +37,9 @@ export default function UserButton({ isActive, onClick, flex }: UserButtonProps)
           forceWhite={isActive}
         />
       </span>
+      {showLabel && (
+        <span className={styles.label}>{label}</span>
+      )}
     </Button>
   );
 }

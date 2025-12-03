@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './Button.module.scss';
 
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: 'default' | 'primary' | 'dashed';
+  variant?: 'default' | 'dashed';
   active?: boolean;
   children: React.ReactNode;
 }
@@ -17,7 +17,6 @@ export default function Button({
   const cls = [
     styles.button,
     active ? styles.active : '',
-    variant === 'primary' ? styles.primary : '',
     variant === 'dashed' ? styles.dashed : '',
     className,
   ]

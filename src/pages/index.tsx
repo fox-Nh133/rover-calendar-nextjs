@@ -2,6 +2,7 @@ import React from 'react';
 import Calendar from '../components/Calendar';
 import TodayInfo from '../components/TodayInfo';
 import InfoMenu from '../components/InfoMenu';
+import HeaderMenu from '../components/HeaderMenu';
 import styles from './index.module.scss';
 
 const Home: React.FC = () => {
@@ -12,14 +13,7 @@ const Home: React.FC = () => {
           <a className={styles.brand} href="/">
             <h1 className={styles.title}>ローバーカレンダー</h1>
           </a>
-          <div className={styles.headerActions}>
-            <button
-              type="button"
-              className={styles.myPageButton}
-            >
-              <span className={styles.myPageLabel}>マイページ</span>
-            </button>
-          </div>
+          <HeaderMenu />
         </div>
       </header>
 
