@@ -119,6 +119,7 @@
   border-radius: 14px;
   border: 1px solid #d5d7de;
   background-color: #ffffff;
+  color: #0f172a;
   font-weight: 600;
   padding: 0.85rem 1rem;
   display: inline-flex;
@@ -130,18 +131,18 @@
 }
 
 .modalButton:hover {
-  border-color: #2563eb;
-  color: #2563eb;
+  border-color: #344455;
 }
 
 .primaryButton {
-  background: #2563eb;
+  background: #527dff;
   color: #ffffff;
-  border-color: #2563eb;
+  border-color: #527dff;
 }
 
 .primaryButton:hover {
-  background: #1d4ed8;
+  background: #6c91ff;
+  border-color: #6c91ff
 }
 
 .buttonIcon {

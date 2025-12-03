@@ -57,6 +57,32 @@ $icon-size: 2rem;
   align-items: center;
 }
 
+/* nav variant (mobile bottom navigation) */
+.button.nav {
+  @media (max-width: 768px) {
+    background: transparent;
+    border: none;
+    padding: 0.5rem;
+    color: #94a3b8;
+    flex: 0 0 auto;
+    border-radius: 0;
+
+    .label {
+      display: none;
+    }
+
+    /* Inactive icon style */
+    &:not(.active) img {
+      filter: invert(1) opacity(0.5);
+    }
+
+    /* Active icon style */
+    &.active img {
+      filter: none;
+    }
+  }
+}
+
 @media (max-width: 600px) {
   .button {
     padding: 0.45rem 0.7rem;

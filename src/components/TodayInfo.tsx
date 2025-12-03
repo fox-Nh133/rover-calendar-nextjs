@@ -4,6 +4,7 @@ import { formatEventTime } from '@/lib/dateUtils';
 import styles from './TodayInfo.module.scss';
 import ThemeResponsiveImage from '@/lib/ThemeResponsiveImage';
 import SafeHtml from '@/lib/SafeHtml';
+import Image from 'next/image';
 
 const TodayInfo: React.FC = () => {
   const [currentDate, setCurrentDate] = useState('');
@@ -55,12 +56,17 @@ const TodayInfo: React.FC = () => {
   return (
     <section className={styles.card}>
       <div className={styles.heading}>
-        <h1 className={styles.date} id="currentDate">
-          {currentDate || 'current date'}
-        </h1>
-        <p className={styles.day} id="currentDay">
-          {currentDay || 'current day'}
-        </p>
+        <div className={styles.mobileHeaderIcon}>
+          <Image src="/favicon/icon-160x160.png" width={60} height={60} alt="icon" />
+        </div>
+        <div className={styles.dateGroup}>
+          <h1 className={styles.date} id="currentDate">
+            {currentDate || 'current date'}
+          </h1>
+          <p className={styles.day} id="currentDay">
+            {currentDay || 'current day'}
+          </p>
+        </div>
       </div>
       <hr className={styles.divider} />
       <p className={styles.sectionTitle} id="closestEvent">

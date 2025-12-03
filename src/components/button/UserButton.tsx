@@ -1,40 +1,39 @@
 import React from 'react';
-import Button from '@/components/common/Button';
+import Button, { ButtonProps } from '@/components/common/Button';
 import ThemeResponsiveImage from '@/lib/ThemeResponsiveImage';
 import styles from '@/components/common/Button.module.scss';
 
-interface UserButtonProps {
-  isActive: boolean;
-  onClick: () => void;
-  flex?: string;
+interface UserButtonProps extends ButtonProps {
   showLabel?: boolean;
   label?: string;
-  customClassName?: string;
 }
 
 export default function UserButton({ 
-  isActive, 
+  active, 
   onClick, 
-  flex, 
   showLabel = false, 
   label = "マイページ", 
-  customClassName = "" 
+  variant,
+  className,
+  dashed,
+  ...props
 }: UserButtonProps) {
   return (
     <Button
-      variant="default"
-      active={isActive}
+      variant={variant || "default"}
+      dashed={dashed}
+      active={active}
       onClick={onClick}
-      aria-pressed={isActive}
-      style={flex ? { flex } : undefined}
-      className={customClassName}
+      aria-pressed={active}
+      className={className}
+      {...props}
     >
       <span className={styles.iconWrap}>
         <ThemeResponsiveImage
           name="user"
           alt="ユーザー"
           className={styles.icon}
-          forceWhite={isActive}
+          forceWhite={active}
         />
       </span>
       {showLabel && (

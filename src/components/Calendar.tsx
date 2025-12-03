@@ -143,7 +143,7 @@ const Calendar: React.FC = () => {
               >
                 <span>カレンダーに追加</span>
                 <img
-                  src="/icons/download.svg"
+                  src="/icons/download-white.svg"
                   alt="Add to Calendar"
                   className={styles.buttonIcon}
                 />

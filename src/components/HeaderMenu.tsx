@@ -1,25 +1,49 @@
-import React from 'react';
-import UserButton from './UserButton';
+import React, { useState, useEffect } from 'react';
+import UserButton from './button/UserButton';
+import InternetStatusButton from './button/InternetStatusButton';
 import styles from './HeaderMenu.module.scss';
 
 interface HeaderMenuProps {
   isUserActive?: boolean;
   onUserClick?: () => void;
-  // 将来的にi18n切り替えなどのメニュー項目を追加する予定
 }
 
 export default function HeaderMenu({ 
   isUserActive = false, 
-  onUserClick = () => {} 
+  onUserClick = () => {}
 }: HeaderMenuProps) {
+  const [isOnline, setIsOnline] = useState(true);
+
+  useEffect(() => {
+    setIsOnline(navigator.onLine);
+
+    const handleOnline = () => setIsOnline(true);
+    const handleOffline = () => setIsOnline(false);
+
+    window.addEventListener('online', handleOnline);
+    window.addEventListener('offline', handleOffline);
+
+    return () => {
+      window.removeEventListener('online', handleOnline);
+      window.removeEventListener('offline', handleOffline);
+    };
+  }, []);
+
   return (
     <div className={styles.headerMenu}>
+      {isOnline && (
+        <InternetStatusButton
+          active={true}
+          onClick={() => {}}
+          className={styles.internetStatusButton}
+        />
+      )}
       <UserButton 
-        isActive={isUserActive}
+        active={isUserActive}
         onClick={onUserClick}
         showLabel={true}
         label="マイページ"
-        customClassName={styles.userButton}
+        className={styles.userButton}
       />
     </div>
   );

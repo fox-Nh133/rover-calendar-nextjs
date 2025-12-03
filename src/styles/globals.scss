@@ -7,6 +7,12 @@ body {
   color: #0f172a;
 }
 
+button,
+input,
+textarea {
+  font-family: inherit;
+}
+
 *,
 *::before,
 *::after {

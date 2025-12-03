@@ -6,11 +6,17 @@
   justify-content: flex-end;
 }
 
-// HeaderMenu内のUserButton用のカスタムスタイル
+// HeaderMenu内のボタンのカスタムスタイル
+
 .userButton {
-  border-radius: 1.5rem; // より大きなcorner radius
+  border-radius: 2rem; // より大きなcorner radius
+  padding-inline: 0.9rem; 
   --button-label-font-size: 1.15rem;
   --button-label-font-weight: 500;
+}
+
+.internetStatusButton {
+  border-radius: 100%;
 }
 
 // レスポンシブ対応

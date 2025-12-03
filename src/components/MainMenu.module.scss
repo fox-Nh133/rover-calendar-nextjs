@@ -1,0 +1,59 @@
+$menu-gap: 0.5rem;
+
+.container {
+  // jsから$menu-gapを参照するためのカスタムプロパティ
+  --menu-gap: #{$menu-gap};
+
+  display: flex;
+  gap: var(--menu-gap);
+  flex-flow: row wrap;
+  margin-top: 1rem;
+  justify-content: space-between
+}
+
+@media (max-width: 768px) {
+  .container {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background-color: #344455;
+    margin: 0;
+    padding: 1rem 2rem;
+    border-radius: 24px 24px 0 0;
+    justify-content: space-around;
+    gap: 0;
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
+  }
+
+  .calendarButton,
+  .searchButton,
+  .userButton {
+    flex: 1 1 33%;
+  }
+
+  .hideOnMobile {
+    display: none !important;
+  }
+}
+
+.calendarButton {
+  flex: 1 1 calc(50% - var(--menu-gap));
+}
+
+.favoritesButton {
+  flex: 1 1 calc(50% - var(--menu-gap));
+}
+
+.searchButton {
+  flex: 3 1;
+}
+
+.addEventButton {
+  flex: 5 1;
+}
+
+.userButton {
+  flex: 2 1;
+}
