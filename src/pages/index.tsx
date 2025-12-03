@@ -2,6 +2,7 @@ import React from 'react';
 import Calendar from '../components/Calendar';
 import TodayInfo from '../components/TodayInfo';
 import InfoMenu from '../components/InfoMenu';
+import HeaderMenu from '../components/HeaderMenu';
 import styles from './index.module.scss';
 
 const Home: React.FC = () => {
@@ -12,28 +13,7 @@ const Home: React.FC = () => {
           <a className={styles.brand} href="/">
             <h1 className={styles.title}>ローバーカレンダー</h1>
           </a>
-          <div className={styles.headerActions}>
-            <label className={styles.searchField} htmlFor="global-search">
-              <span className={styles.srOnly}>検索</span>
-              <input
-                id="global-search"
-                className={styles.searchInput}
-                type="search"
-                placeholder="Search"
-              />
-              <span className={styles.searchIcon} aria-hidden="true">
-                🔍
-              </span>
-            </label>
-            <nav className={styles.navLinks} aria-label="主要ナビゲーション">
-              <a className={`${styles.navLink} ${styles.navLinkActive}`} href="/">
-                ホーム
-              </a>
-              <a className={styles.navLink} href="/about">
-                このサイトについて
-              </a>
-            </nav>
-          </div>
+          <HeaderMenu />
         </div>
       </header>
 

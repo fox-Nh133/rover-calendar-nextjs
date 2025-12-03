@@ -1,0 +1,31 @@
+import React from 'react';
+import styles from './Button.module.scss';
+
+export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  variant?: 'default' | 'dashed';
+  active?: boolean;
+  children: React.ReactNode;
+}
+
+export default function Button({
+  variant = 'default',
+  active = false,
+  className = '',
+  children,
+  ...props
+}: ButtonProps) {
+  const cls = [
+    styles.button,
+    active ? styles.active : '',
+    variant === 'dashed' ? styles.dashed : '',
+    className,
+  ]
+    .filter(Boolean)
+    .join(' ');
+
+  return (
+    <button className={cls} {...props}>
+      {children}
+    </button>
+  );
+}
