@@ -51,7 +51,8 @@ $icon-size: 2rem;
 }
 
 .label {
-  font-size: 1.15rem;
+  font-size: var(--button-label-font-size, 1.15rem);
+  font-weight: var(--button-label-font-weight, inherit);
   display: inline-flex;
   align-items: center;
 }

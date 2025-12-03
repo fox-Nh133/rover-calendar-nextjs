@@ -9,11 +9,8 @@
 // HeaderMenu内のUserButton用のカスタムスタイル
 .userButton {
   border-radius: 1.5rem; // より大きなcorner radius
-  
-  .label {
-    font-size: 1.15rem;
-    font-weight: 500;
-  }
+  --button-label-font-size: 1.15rem;
+  --button-label-font-weight: 500;
 }
 
 // レスポンシブ対応
@@ -24,8 +21,6 @@
   }
   
   .userButton {
-    .label {
-      font-size: 1rem;
-    }
+    --button-label-font-size: 1rem;
   }
 }
