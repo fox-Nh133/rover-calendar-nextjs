@@ -1,11 +1,9 @@
 $menu-gap: 0.5rem;
 
 .container {
-  // jsから$menu-gapを参照するためのカスタムプロパティ
-  --menu-gap: #{$menu-gap};
 
   display: flex;
-  gap: var(--menu-gap);
+  gap: $menu-gap;
   flex-flow: row wrap;
   margin-top: 1rem;
   justify-content: space-between
@@ -21,7 +19,7 @@ $menu-gap: 0.5rem;
     background-color: #344455;
     margin: 0;
     padding: 1rem 2rem;
-    border-radius: 24px 24px 0 0;
+    border-radius: 0;
     justify-content: space-around;
     gap: 0;
     box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
@@ -39,11 +37,11 @@ $menu-gap: 0.5rem;
 }
 
 .calendarButton {
-  flex: 1 1 calc(50% - var(--menu-gap));
+  flex: 1 1 calc(50% - $menu-gap);
 }
 
 .favoritesButton {
-  flex: 1 1 calc(50% - var(--menu-gap));
+  flex: 1 1 calc(50% - $menu-gap);
 }
 
 .searchButton {

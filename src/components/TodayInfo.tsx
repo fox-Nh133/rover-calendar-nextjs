@@ -57,7 +57,12 @@ const TodayInfo: React.FC = () => {
     <section className={styles.card}>
       <div className={styles.heading}>
         <div className={styles.mobileHeaderIcon}>
-          <Image src="/favicon/icon-160x160.png" width={60} height={60} alt="icon" />
+          <Image 
+            src="/favicon/icon-trs-160x160.png" 
+            width={60} 
+            height={60} 
+            alt="icon"
+          />
         </div>
         <div className={styles.dateGroup}>
           <h1 className={styles.date} id="currentDate">
