@@ -21,32 +21,16 @@
   max-width: 520px;
   width: calc(100% - 2rem);
   overflow: hidden;
-  -webkit-animation: fadeIn 0.2s ease;
   animation: fadeIn 0.2s ease;
-}
-
-@-webkit-keyframes fadeIn {
-  from {
-    opacity: 0;
-    -webkit-transform: translateY(12px);
-    transform: translateY(12px);
-  }
-  to {
-    opacity: 1;
-    -webkit-transform: translateY(0);
-    transform: translateY(0);
-  }
 }
 
 @keyframes fadeIn {
   from {
     opacity: 0;
-    -webkit-transform: translateY(12px);
     transform: translateY(12px);
   }
   to {
     opacity: 1;
-    -webkit-transform: translateY(0);
     transform: translateY(0);
   }
 }
@@ -78,7 +62,6 @@
   border-radius: 999px;
   font-size: 1rem;
   cursor: pointer;
-  -webkit-transition: background-color 0.2s ease;
   transition: background-color 0.2s ease;
 }
 
@@ -144,7 +127,6 @@
   justify-content: center;
   gap: 0.5rem;
   cursor: pointer;
-  -webkit-transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
   transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 }
 
