@@ -82,6 +82,7 @@ $logo-size: 3.2rem;
   padding: 0.65rem 2.5rem 0.65rem 1rem;
   font-size: 0.95rem;
   background-color: #ffffff;
+  -webkit-transition: border-color 0.2s ease;
   transition: border-color 0.2s ease;
 }
 
@@ -94,6 +95,7 @@ $logo-size: 3.2rem;
   position: absolute;
   right: 1rem;
   top: 50%;
+  -webkit-transform: translateY(-50%);
   transform: translateY(-50%);
   font-size: 0.95rem;
   color: #94a3b8;
@@ -111,6 +113,7 @@ $logo-size: 3.2rem;
   color: #4a5568;
   padding: 0.4rem 0.85rem;
   border-radius: 999px;
+  -webkit-transition: background-color 0.2s ease, color 0.2s ease;
   transition: background-color 0.2s ease, color 0.2s ease;
 }
 

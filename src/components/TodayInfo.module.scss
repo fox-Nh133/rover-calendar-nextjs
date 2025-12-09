@@ -16,6 +16,12 @@
 
 .mobileHeaderIcon {
   display: none;
+  
+  /* Next.js Imageコンポーネントの透過PNG対応 */
+  img {
+    background: transparent;
+    mix-blend-mode: normal;
+  }
 }
 
 .dateGroup {
