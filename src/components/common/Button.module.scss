@@ -47,7 +47,9 @@ $icon-size: 2rem;
 }
 
 .icon {
-  width: auto;
+  width: 100%;
+  height: auto;
+  display: block;
 }
 
 .label {
@@ -62,9 +64,10 @@ $icon-size: 2rem;
   @media (max-width: 768px) {
     background: transparent;
     border: none;
-    padding: 0.5rem;
+    padding: 1.2rem 0;
+    width: 100%;
     color: #94a3b8;
-    flex: 0 0 auto;
+    flex: 1;
     border-radius: 0;
 
     .label {
