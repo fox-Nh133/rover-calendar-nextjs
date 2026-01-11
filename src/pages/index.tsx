@@ -15,7 +15,7 @@ const Home: React.FC = () => {
             <span className={styles.logoWrapper}>
               <Image
                 className={styles.logo}
-                src="/favicon/icon-160x160.png"
+                src="/icons/app-logo-without-bg.png"
                 alt="ローバーカレンダーのアイコン"
                 fill
                 priority
