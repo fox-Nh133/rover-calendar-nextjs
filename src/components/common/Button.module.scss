@@ -60,29 +60,32 @@ $icon-size: 2rem;
 }
 
 /* nav variant (mobile bottom navigation) */
-.button.nav {
-  @media (max-width: 768px) {
-    background: transparent;
-    border: none;
-    padding: 1.2rem 0;
-    width: 100%;
-    color: #94a3b8;
-    flex: 1;
-    border-radius: 0;
+@media (max-width: 768px) {
+  .button.nav {
+      background: transparent;
+      border: none;
+      padding: 1.2rem 0;
+      width: 100%;
+      color: #94a3b8;
+      flex: 1;
+      border-radius: 0;
 
-    .label {
-      display: none;
-    }
+      .label {
+        display: none;
+      }
 
-    /* Inactive icon style */
-    &:not(.active) img {
-      filter: invert(1) opacity(0.5);
-    }
+      /* Inactive icon style */
+      &:not(.active) img {
+        filter: invert(1) brightness(0.8);
+      }
 
-    /* Active icon style */
-    &.active img {
-      filter: none;
-    }
+      /* Active icon style */
+      &.active img {
+        filter: none;
+      }
+  }
+  .button:hover {
+    background: #2c3a4a;
   }
 }
 
